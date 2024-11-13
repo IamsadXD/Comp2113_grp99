@@ -8,16 +8,16 @@
 ## Application Description
 
 ## List of Features
-Menu (Play, Save, Exit, Instructions)
-Ball collision
-Brick generation
-Power bar
-Powerups (Increase size of ball, controlled movement, extra lives, longer power bar)
-Powerdowns (Extreme speeds, shorter power bar, decrease size of ball, reduce extra lives)
-Scoreboard (Bricks destroyed)
-Audio 
+- Menu (Play, Save, Exit, Instructions)
+- Ball collision
+- Brick generation
+- Power bar
+- Powerups (Increase size of ball, controlled movement, extra lives, longer power bar)
+- Powerdowns (Extreme speeds, shorter power bar, decrease size of ball, reduce extra lives)
+- Scoreboard (Bricks destroyed)
+- Audio 
 
 ## List of non-standard C/C++ libraries
-SFML
+- SFML
 
 ## Compilation and Execution Instructions
