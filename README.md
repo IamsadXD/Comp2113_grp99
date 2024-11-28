@@ -18,6 +18,6 @@
 - Audio (Rayan)
 
 ## List of non-standard C/C++ libraries
-- SFML
+- ncurses
 
 ## Compilation and Execution Instructions
