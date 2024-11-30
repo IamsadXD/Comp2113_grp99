@@ -4,7 +4,7 @@ TARGET = test
 SRCS = test.cpp
 INCLUDES = -I../ncurses/include
 LIBS = -L../ncurses/lib -lncurses
-
+#Aodfianodfinadofi
 # Default target
 all: $(TARGET)
 
