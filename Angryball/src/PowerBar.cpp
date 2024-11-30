@@ -1,6 +1,5 @@
 #include "PowerBar.h"
 
-// Constructor to initialize the power bar
 PowerBar::PowerBar(int length, int maxLength, int x, int y)
     : length(length), maxLength(maxLength), x(x), y(y) {}
 
