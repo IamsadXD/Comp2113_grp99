@@ -1,27 +1,29 @@
 #ifndef POWERBAR_H
 #define POWERBAR_H
 
-// PowerBar class declaration
-class PowerBar {
-public:
+// Power Bar structure with a constructor
+struct PowerBar {
     int length;    // Length of the power bar
     int maxLength; // Maximum length of the bar
     int x, y;      // Position of the bar
 
-    // Constructor
-    PowerBar(int length, int maxLength, int x, int y);
+    // Constructor for initializing the power bar
+    PowerBar(int length, int maxLength, int x, int y)
+        : length(length), maxLength(maxLength), x(x), y(y) {}
+};
 
-    // Draw the power bar
-    void draw() const;
+// Power bar renderer class declaration
+class PowerBarRenderer {
+public:
+    PowerBar bar;
 
-    // Update the power bar's length
-    void update(int delta);
+    PowerBarRenderer(int length, int maxLength, int x, int y)
+        : bar(length, maxLength, x, y) {}
 
-    // Check if the power bar is full
-    bool isFull() const;
-
-    // Reset the power bar
-    void reset();
+    void draw() const; // Draw the power bar
+    void update(int delta); // Update the power bar's length
+    bool isFull() const; // Check if the bar is full
+    void reset(); // Reset the power bar
 };
 
 #endif // POWERBAR_H
