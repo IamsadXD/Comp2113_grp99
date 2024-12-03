@@ -3,24 +3,26 @@
 
 #include <vector>
 
-// Structure for Brick
+// Brick structure
 struct Brick {
     int x, y;    // Position of the brick
     bool active; // Whether the brick is active or destroyed
-    char type;   // Brick type: '#' for normal, '+' for power-up, '-' for power-down
+    bool isSpecial; // Whether the brick is special (e.g., power-up or power-down)
+    
+    // Constructor to initialize the brick
+    Brick(int x, int y, bool active, bool isSpecial);
 };
 
-// Class for Brick Generator
+// Brick generator and renderer
 class BrickGenerator {
 public:
-    int rows, cols; // Number of rows and columns of bricks
-    int startX, startY; // Starting position of the brick grid
-    int spacingX, spacingY; // Spacing between bricks
-    std::vector<Brick> bricks; // Vector of bricks
+    int rows, cols;
+    int startX, startY, spacingX, spacingY;
+    std::vector<Brick> bricks;
 
     BrickGenerator(int rows, int cols, int startX, int startY, int spacingX, int spacingY);
-    void generateBricks(); // Generate the bricks with normal and special types
-    void drawBricks() const; // Render bricks on the screen
+    void generateBricks();
+    void drawBricks() const;
 };
 
-#endif // BRICKGENERATOR_H
+#endif
