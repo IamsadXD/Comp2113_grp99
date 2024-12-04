@@ -58,7 +58,3 @@ void drawBar(int barX, int barLength) {
     }
 }
 
-
-
-    endwin(); // End ncurses mode
-}
