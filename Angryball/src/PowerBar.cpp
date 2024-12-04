@@ -3,39 +3,33 @@
 
 // Draw the power bar on the screen
 void PowerBarRenderer::draw() const {
-    // Draw the minimum point of the power bar with '[' at a fixed position
-    mvaddch(bar.y, bar.x, '[');
+    mvaddch(bar.y, bar.x, '['); // Fixed starting bracket
 
-    // Draw the power bar itself with '=' between the fixed positions
-    for (int i = 0; i < bar.length; ++i) { // Start drawing after the minimum point
-        mvaddch(bar.y, bar.x + i + 1, '=');
+    // Draw the power bar itself
+    for (int i = 1; i <= bar.maxLength; ++i) {
+        if (i <= bar.length) {
+            mvaddch(bar.y, bar.x + i, '=');
+        } else {
+            mvaddch(bar.y, bar.x + i, ' '); // Empty space inside brackets
+        }
     }
 
-    // Draw the maximum point of the power bar with ']' at a fixed position
-    mvaddch(bar.y, bar.x + bar.maxLength + 1, ']');
+    mvaddch(bar.y, bar.x + bar.maxLength + 1, ']'); // Fixed closing bracket
 }
 
-// Update the power bar's length based on the input (delta)
+// Update the power bar's length
 void PowerBarRenderer::update(int delta) {
     bar.length += delta;
 
-    // If the bar exceeds the max length, reset it to 2
     if (bar.length > bar.maxLength) {
-        bar.length = 2;
+        bar.length = 2; // Reset to initial length if exceeding max
     }
-
-    // Ensure the bar length doesn't go below 0
     if (bar.length < 0) {
-        bar.length = 0;
+        bar.length = 2; // Reset to initial length if below min
     }
 }
 
-// Check if the power bar is full
-bool PowerBarRenderer::isFull() const {
-    return bar.length == bar.maxLength; // Check if the bar is full
-}
-
-// Reset the power bar to 0
+// Reset the power bar to its initial state
 void PowerBarRenderer::reset() {
-    bar.length = 0; // Reset the bar to 0 when used
+    bar.length = 2; // Reset the bar length to the initial length
 }
