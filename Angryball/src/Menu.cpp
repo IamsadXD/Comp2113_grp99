@@ -1,8 +1,8 @@
 #include <ncurses.h>
 #include <iostream>
 #include <string>
- 
-#include "Menu.h"
+#include "../include/Menu.h"
+#include "../include/game.h"
 
 using namespace std; 
 
@@ -13,20 +13,18 @@ Menu::Menu() {
     keypad(stdscr, TRUE);
 }
 
-
 int Menu::display_options() {
-
     // to display the ascii art
     menuwin = newwin(menu_h, menu_w, 1, 1);
     box(menuwin, 0, 0);
     
     for (int i = 0; i < 5; i++) {
-        mvwprintw(menuwin, i + 5, 3, title[i].c_str());
+        mvwprintw(menuwin, i + 5, 3, "%s", title[i].c_str()); // Use "%s" format specifier
     }   
 
     wrefresh(menuwin);
 
-    keypad(menuwin,true);
+    keypad(menuwin, true);
 
     string options[4] = {"Start Game", "Game Info", "How to Play", "Exit Game"};
     int option;
@@ -37,29 +35,29 @@ int Menu::display_options() {
             if (i == highlight) {
                 wattron(menuwin, A_REVERSE); 
             }
-            // display options
-            mvwprintw(menuwin, i + 15, 3, options[i].c_str());  
+            mvwprintw(menuwin, i + 15, 3, "%s", options[i].c_str()); // Use "%s" format specifier
             wattroff(menuwin, A_REVERSE);
         }
+        wrefresh(menuwin);
 
-        option = wgetch(menuwin);
-        switch (option) {
+        int ch = wgetch(menuwin);
+        switch (ch) {
             case KEY_UP:
                 highlight--;
-                if (highlight < 0) {
-                    highlight = 3; // wrap around to go to last option
+                if (highlight == -1) {
+                    highlight = 3;
                 }
                 break;
             case KEY_DOWN:
                 highlight++;
-                if (highlight > 3) {
-                    highlight = 0; // wrap around to go to first option
+                if (highlight == 4) {
+                    highlight = 0;
                 }
                 break;
-            case 10: // return key has been pressed
+            case 10: // Enter key
                 if(highlight == 0) {
                     string player_name = input_name(menu_w, menu_h);
-                    //new Game(name);
+                    game(player_name);
                 } else if(highlight == 1) {
                     int y_max, x_max;
                     getmaxyx(stdscr, y_max, x_max);
@@ -77,17 +75,14 @@ int Menu::display_options() {
                 break;
             default:
                 break;
-
         }
-        
         wrefresh(menuwin);
     }
-
 }
 
 
 void Menu::game_info(int y_max, int x_max) {
-    WINDOW* game_info_win = newwin(15, 70, (y_max - 50) / 2, (x_max - 40) / 2);
+    WINDOW* game_info_win = newwin(15, 70, (y_max - 15) / 2, (x_max - 70) / 2);
     box(game_info_win, 0, 0);
     mvwprintw(game_info_win, 2, 3, "About the game:");
     mvwprintw(game_info_win, 4, 3, "Welcome to Angryball!");
@@ -95,32 +90,43 @@ void Menu::game_info(int y_max, int x_max) {
     mvwprintw(game_info_win, 6, 3, "An arcade game inspired by DX-Ball");
     mvwprintw(game_info_win, 7, 3, "Developed by: Group 99");
     mvwprintw(game_info_win, 9, 3, "Press any key to return.");
-   
 
-    wgetch(game_info_win); 
-
-    werase(game_info_win); 
     wrefresh(game_info_win);
 
-    delwin(game_info_win);  
+    wgetch(game_info_win);
+    flushinp(); // Flush the input buffer
+
+    werase(game_info_win);
+    wrefresh(game_info_win);
+    delwin(game_info_win);
+
+    // Refresh the menu window
+    touchwin(menuwin);
+    wrefresh(menuwin);
 }
 
 void Menu::play_instructions(int y_max, int x_max) {
-    WINDOW* play_instructions_win = newwin(15, 70, (y_max - 50) / 2, (x_max - 40) / 2);
+    WINDOW* play_instructions_win = newwin(15, 70, (y_max - 15) / 2, (x_max - 70) / 2);
     box(play_instructions_win, 0, 0);
     mvwprintw(play_instructions_win, 2, 3, "Game Instructions:");
     mvwprintw(play_instructions_win, 4, 3, "1. Navigate the power bar using the arrow keys");
     mvwprintw(play_instructions_win, 5, 3, "2. Strike the bricks to earn points");
     mvwprintw(play_instructions_win, 6, 3, "3. Aim to gather power-ups that can improve control");
     mvwprintw(play_instructions_win, 7, 3, "4. Avoid power downs that may hinder your progress");
-    mvwprintw(play_instructions_win, 9, 3, "Press any key to return to main menu");
-    
-    wgetch(play_instructions_win); 
+    mvwprintw(play_instructions_win, 9, 3, "Press any key to return to the main menu");
 
-    werase(play_instructions_win); 
     wrefresh(play_instructions_win);
 
-    delwin(play_instructions_win);  
+    wgetch(play_instructions_win);
+    flushinp(); // Flush the input buffer
+
+    werase(play_instructions_win);
+    wrefresh(play_instructions_win);
+    delwin(play_instructions_win);
+
+    // Refresh the menu window
+    touchwin(menuwin);
+    wrefresh(menuwin);
 }
 
 

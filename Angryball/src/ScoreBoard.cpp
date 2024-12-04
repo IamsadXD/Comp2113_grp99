@@ -1,4 +1,4 @@
-#include "Scoreboard.h"
+#include "../include/Scoreboard.h"
 using namespace std;
 
 void Scoreboard::display() {
