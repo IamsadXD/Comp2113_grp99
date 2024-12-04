@@ -1,7 +1,7 @@
 #include <ncurses.h>
 #include <unistd.h>
-#include <cstdlib> 
-#include <ctime>   
+#include <cstdlib>
+#include <ctime>
 
 struct Ball {
     int x, y;         
