@@ -13,11 +13,12 @@ public:
     };
 
     PowerDown(Type type);
-    void applyEffect(int &speed, int& barLength);
-    std::string getName() const;
+    void applyPowerDown(double &speed, int& barLength);
+    std::string getPowerDown() const;
 
 private:
     Type type;
+    std::string lastEffect; // Store the last applied effect
 };
 
 #endif // POWERDOWN_H

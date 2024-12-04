@@ -2,35 +2,35 @@
 #include <iostream>
 #include <cstdlib> // For rand() and RAND_MAX
 
-PowerDown::PowerDown(Type type) : type(type) {}
+PowerDown::PowerDown(Type type) : type(type), lastEffect("None") {}
 
-void PowerDown::applyEffect(int &speed, int& barLength)
+void PowerDown::applyPowerDown(double &speed, int &barLength)
 {
-    switch (type)
+    int randomEffect = rand() % 2; // Randomly choose an effect (0 or 1)
+
+    switch (randomEffect)
     {
-    case Type::ExtremeSpeeds:
+    case 0:
         {
+            if (speed < 5000){
+                break;
+            }
             double min = 1.25;
             double max = 1.75;
-            speed = speed * ( min + (max - min) * (static_cast<double>(rand()) / RAND_MAX)); // Random denominator from 1.25 to 1.75
+            speed = speed / (min + (max - min) * (static_cast<double>(rand()) / RAND_MAX)); // Increasing speed from 1.25 times to 1.75 times
+            lastEffect = "Extreme Speeds";
+            std::cout << "Extreme Speeds effect applied." << std::endl;
             break;
         }
-    case Type::ShorterPowerBar:
-        barLength -= 1 + rand() % 5; // Decrease bar length from 1 to 5
+    case 1:
+        barLength -= 1 + rand() % 5; // Randomly decrease bar length from 1 to 5
+        lastEffect = "Shorter Power Bar";
+        std::cout << "Shorter Power Bar effect applied." << std::endl;
         break;
     }
-   
 }
 
-std::string PowerDown::getName() const
+std::string PowerDown::getPowerDown() const
 {
-    switch (type)
-    {
-    case Type::ExtremeSpeeds:
-        return "Extreme Speeds";
-    case Type::ShorterPowerBar:
-        return "Shorter Power Bar";
-    default:
-        return "Unknown Power-Down";
-    }
+    return lastEffect;
 }

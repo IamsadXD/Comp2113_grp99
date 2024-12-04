@@ -8,6 +8,7 @@ struct Brick {
     int x, y;           // Position of the brick
     bool active;        // Whether the brick is active or destroyed
     bool isSpecialBrick; // Whether the brick is special (e.g., + or -)
+    char specialType; // '+' for power-up, '-' for power-down, '\0' for normal brick
 };
 
 // Brick generator class declaration

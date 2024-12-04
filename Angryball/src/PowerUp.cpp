@@ -1,35 +1,41 @@
 #include "../include/PowerUp.h"
 #include <iostream>
+#include <cstdlib> // For rand() and RAND_MAX
 
-PowerUp::PowerUp(Type type) : type(type) {}
+PowerUp::PowerUp(Type type) : type(type), lastEffect("None") {}
 
-void PowerUp::applyEffect(int &lives, int &barLength)
+void PowerUp::applyPowerUp(int &lives, int &barLength, bool &reset)
 {
-    switch (type)
+    int randomEffect = rand() % 3; // Randomly choose an effect (0, 1, or 2)
+
+    switch (randomEffect)
     {
-    case Type::ControlledMovement:
-        // Logic to allow controlled movement of the ball
+    case 0:
+        // Controlled Movement (Placeholder, as no specific logic is provided)
+        reset = true;
+        lastEffect = "Controlled Movement";
+        std::cout << "Controlled Movement effect applied." << std::endl;
         break;
-    case Type::RegenLives:
-        lives++; // Increase the number of lives
+    case 1:
+        if (lives == 3){
+            break;
+        }
+        lives += 1; // Increase lives by 1
+        lastEffect = "Regen Lives";
+        std::cout << "Regen Lives effect applied." << std::endl;
         break;
-    case Type::LongerPowerBar:
-        barLength += 1 + rand() % 5; // Increase bar length from 1 to 5
+    case 2:
+        if (barLength > 60){
+            break;
+        }
+        barLength += 1 + rand() % 5; // Randomly increase bar length from 1 to 5
+        lastEffect = "Longer Power Bar";
+        std::cout << "Longer Power Bar effect applied." << std::endl;
         break;
     }
 }
 
-std::string PowerUp::getName() const
+std::string PowerUp::getPowerUp() const
 {
-    switch (type)
-    {
-    case Type::ControlledMovement:
-        return "Controlled Movement";
-    case Type::RegenLives:
-        return "Extra Lives";
-    case Type::LongerPowerBar:
-        return "Longer Power Bar";
-    default:
-        return "Unknown Power-Up";
-    }
+    return lastEffect;
 }

@@ -14,11 +14,12 @@ public:
     };
 
     PowerUp(Type type);
-    void applyEffect(int &lives, int& barLength);
-    std::string getName() const;
+    void applyPowerUp(int &lives, int& barLength, bool& reset);
+    std::string getPowerUp() const;
 
 private:
     Type type;
+    std::string lastEffect; // Store the last applied effect
 };
 
 #endif // POWERUP_H
