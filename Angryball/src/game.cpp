@@ -7,6 +7,14 @@
 #include "../include/PowerUp.h"
 #include "../include/PowerDown.h"
 #include "../include/Scoreboard.h"
+#include "../include/Menu.h" // Include Menu for title screen
+
+void displayGameOver() {
+    clear();
+    mvprintw(LINES / 2, (COLS - 10) / 2, "Game Over"); // Center the message
+    refresh();
+    usleep(2000000); // Sleep for 2 seconds
+}
 
 void game(const std::string& player_name) {
     srand(static_cast<unsigned int>(time(0))); // Seed the random number generator
@@ -21,22 +29,27 @@ void game(const std::string& player_name) {
     // Initialization
     double speed = 20000; // Adjust speed of ball by sleep time
     int barX = 10;      // Initial position of the bar
-    int barLength = 30; // Length of the bar
+    int barLength = 15; // Length of the bar
     int lives = 3;     // Number of lives
-    int brickType = 0; // Type of brick (0=normal, 1=power-up, 2=power-down)
+    int brickType = 0; // Type of brick
     bool outofbounds = false;
     bool reset = false;
     bool ballOnBar = true; // Track if the ball is on the bar
     Ball ball;
     initializeBall(ball, barX, barLength);
-    BrickGenerator brickGen(10, COLS, 70, 10, 1, 1); 
+    //int rows, int cols, int startX, int startY, int spacingX, int spacingY
+    BrickGenerator brickGen(5, COLS, 0, 8, 1, 1); 
     brickGen.generateBricks(); // Generate bricks
     PowerUp powerUp(PowerUp::Type::RegenLives);
     PowerDown powerDown(PowerDown::Type::ExtremeSpeeds);
     Scoreboard scoreboard;
+
     while (true) {
         clear(); // Clear the screen
         // Draw the bar
+        for (int i = 0; i < COLS; ++i) {
+            mvaddch(5, i, '=');
+        } // Draw '=' at row 5 (change this if your scoreboard is higher)
         brickGen.drawBricks();
         for (int i = 0; i < barLength; ++i) {
             mvaddch(LINES - 1, barX + i, '#'); // Draw the bar at the bottom
@@ -62,22 +75,15 @@ void game(const std::string& player_name) {
             ballOnBar = true; // Reset the ball to be on the bar
             initializeBall(ball, barX, barLength);
         }
-        switch(brickType) {
-            case 1:
-                powerUp.applyPowerUp(lives, barLength, reset);
-                brickType = 0;
-                if (reset){
-                    ballOnBar = true; // Reset the ball to be on the bar
-                    initializeBall(ball, barX, barLength);
-                    reset = false;
-                }
-                break;
-            case 2:
-                powerDown.applyPowerDown(speed, barLength);
-                brickType = 0;
-                break;
+
+        // Check game over condition
+        if (lives <= 0) {
+            scoreboard.store_score(player_name);
+            displayGameOver(); // Show Game Over message
+            break; // End the game loop
         }
 
+        // Handle user input
         int ch = getch(); // Get user input
         if (ch == KEY_LEFT) {
             if (barX > 0) barX -= 5; // Move left by 5 steps
@@ -90,15 +96,11 @@ void game(const std::string& player_name) {
         } else if (ch == 'q') {
             scoreboard.store_score(player_name);
             clear();
+            endwin(); // End ncurses mode before returning
             return; // Quit on 'q'
         }
 
         usleep(speed); // Sleep for a short time (default 10ms)
-        
-        if (lives <= 0) {
-            scoreboard.store_score(player_name);
-            break; // End the game if no lives left
-        }
     }
 
     endwin(); // End ncurses mode

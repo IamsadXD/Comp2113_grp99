@@ -9,5 +9,4 @@ struct Ball {
 };
 void initializeBall(Ball &ball, int barX, int barLength); // Updated function signature
 void moveBall(Ball &ball, int barX, int barLength, BrickGenerator &brickGen, bool &outofbounds, int& brickType, Scoreboard &scoreboard);
-void drawBar(int barX, int barLength);
 #endif

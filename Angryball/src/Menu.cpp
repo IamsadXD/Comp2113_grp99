@@ -13,10 +13,27 @@ Menu::Menu() {
     keypad(stdscr, TRUE);
 }
 
+void draw_custom_border(WINDOW* win) {
+    int max_y, max_x;
+    getmaxyx(win, max_y, max_x); // Get the dimensions of the window
+
+    // Draw top and bottom borders
+    for (int x = 0; x < max_x; ++x) {
+        mvwaddch(win, 0, x, 'X'); // Top border
+        mvwaddch(win, max_y - 1, x, 'X'); // Bottom border
+    }
+
+    // Draw left and right borders
+    for (int y = 0; y < max_y; ++y) {
+        mvwaddch(win, y, 0, 'X'); // Left border
+        mvwaddch(win, y, max_x - 1, 'X'); // Right border
+    }
+}
+
 int Menu::display_options() {
     // to display the ascii art
     menuwin = newwin(menu_h, menu_w, 1, 1);
-    box(menuwin, 0, 0);
+    draw_custom_border(menuwin);
     
     for (int i = 0; i < 5; i++) {
         mvwprintw(menuwin, i + 5, 3, "%s", title[i].c_str()); // Use "%s" format specifier
@@ -83,7 +100,7 @@ int Menu::display_options() {
 
 void Menu::game_info(int y_max, int x_max) {
     WINDOW* game_info_win = newwin(15, 70, (y_max - 15) / 2, (x_max - 70) / 2);
-    box(game_info_win, 0, 0);
+    draw_custom_border(game_info_win);
     mvwprintw(game_info_win, 2, 3, "About the game:");
     mvwprintw(game_info_win, 4, 3, "Welcome to Angryball!");
     mvwprintw(game_info_win, 5, 3, "Version: 1.0");
@@ -107,7 +124,7 @@ void Menu::game_info(int y_max, int x_max) {
 
 void Menu::play_instructions(int y_max, int x_max) {
     WINDOW* play_instructions_win = newwin(15, 70, (y_max - 15) / 2, (x_max - 70) / 2);
-    box(play_instructions_win, 0, 0);
+    draw_custom_border(play_instructions_win);
     mvwprintw(play_instructions_win, 2, 3, "Game Instructions:");
     mvwprintw(play_instructions_win, 4, 3, "1. Navigate the power bar using the arrow keys");
     mvwprintw(play_instructions_win, 5, 3, "2. Strike the bricks to earn points");
@@ -134,8 +151,7 @@ void Menu::play_instructions(int y_max, int x_max) {
 string Menu::input_name(int menu_w, int menu_h) {
     char player_name[50];  
     WINDOW* input_name_win = newwin(5, 70, (menu_h) / 2, (menu_w - 70) / 2);
-    keypad(input_name_win,true);
-    box(input_name_win, 0, 0);
+    draw_custom_border(input_name_win);
     mvwprintw(input_name_win, 2, 3, "Enter player name to start: ");
     wrefresh(input_name_win);
 
