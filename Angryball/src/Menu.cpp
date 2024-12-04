@@ -2,7 +2,7 @@
 #include <iostream>
 #include <string>
  
-#include "menu.h"
+#include "Menu.h"
 
 using namespace std; 
 
@@ -95,7 +95,7 @@ void Menu::game_info(int y_max, int x_max) {
     mvwprintw(game_info_win, 6, 3, "An arcade game inspired by DX-Ball");
     mvwprintw(game_info_win, 7, 3, "Developed by: Group 99");
     mvwprintw(game_info_win, 9, 3, "Press any key to return.");
-    wrefresh(game_info_win);
+   
 
     wgetch(game_info_win); 
 
@@ -114,8 +114,7 @@ void Menu::play_instructions(int y_max, int x_max) {
     mvwprintw(play_instructions_win, 6, 3, "3. Aim to gather power-ups that can improve control");
     mvwprintw(play_instructions_win, 7, 3, "4. Avoid power downs that may hinder your progress");
     mvwprintw(play_instructions_win, 9, 3, "Press any key to return to main menu");
-    wrefresh(play_instructions_win);
-
+    
     wgetch(play_instructions_win); 
 
     werase(play_instructions_win); 
