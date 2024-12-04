@@ -5,8 +5,8 @@
 
 // Brick structure with added isSpecialBrick flag
 struct Brick {
-    int x, y;          // Position of the brick
-    bool active;       // Whether the brick is active or destroyed
+    int x, y;           // Position of the brick
+    bool active;        // Whether the brick is active or destroyed
     bool isSpecialBrick; // Whether the brick is special (e.g., + or -)
 };
 
@@ -24,6 +24,9 @@ public:
 
     // Draw the bricks on the screen
     void drawBricks() const;
+
+    // Check if all bricks are destroyed
+    bool areAllBricksDestroyed() const;
 };
 
 #endif // BRICKGENERATOR_H

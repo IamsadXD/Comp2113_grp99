@@ -12,7 +12,6 @@ void BrickGenerator::generateBricks() {
     for (int row = 0; row < rows; ++row) {
         for (int col = 0; col < cols; ++col) {
             bool isSpecialBrick = false;
-            bool isActive = rand() % 2 == 0; // 50% chance for each brick to be active
 
             // 70% chance for a normal brick
             if (rand() % 10 < 7) {
@@ -20,7 +19,8 @@ void BrickGenerator::generateBricks() {
                 isSpecialBrick = rand() % 10 < 3; // 30% chance for special brick inside normal bricks
             }
 
-            bricks.push_back({startX + col * spacingX, startY + row * spacingY, isActive, isSpecialBrick});
+            // Add the brick with active set to true (always active initially)
+            bricks.push_back({startX + col * spacingX, startY + row * spacingY, true, isSpecialBrick});
         }
     }
 }
@@ -31,11 +31,21 @@ void BrickGenerator::drawBricks() const {
         if (brick.active) {
             if (brick.isSpecialBrick) {
                 // Draw special bricks ('+' for power-ups and '-' for power-downs)
-                mvaddch(brick.y, brick.x, brick.isSpecialBrick ? (rand() % 2 == 0 ? '+' : '-') : '#');
+                mvaddch(brick.y, brick.x, brick.isSpecialBrick ? '+' : '-');
             } else {
                 // Draw normal bricks
                 mvaddch(brick.y, brick.x, '#');
             }
         }
     }
+}
+
+// Check if all bricks are destroyed (inactive)
+bool BrickGenerator::areAllBricksDestroyed() const {
+    for (const auto& brick : bricks) {
+        if (brick.active) {
+            return false; // If any brick is active, return false
+        }
+    }
+    return true; // If all bricks are inactive, return true
 }
