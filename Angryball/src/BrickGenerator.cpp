@@ -17,7 +17,7 @@ void BrickGenerator::generateBricks() {
             // 70% chance for a normal brick
             if (rand() % 10 < 7) {
                 // Inside the normal brick, 10% chance for it to be special (either + or -)
-                if (rand() % 10 < 10) {
+                if (rand() % 10 < 1) {
                     isSpecialBrick = true;
                     specialType = (rand() % 2 == 0) ? '+' : '-'; // Randomly assign + or -
                 }
