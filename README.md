@@ -21,3 +21,4 @@
 - ncurses
 
 ## Compilation and Execution Instructions
+export TERMINFO=../ncurses/share/terminfo
