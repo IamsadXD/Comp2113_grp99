@@ -58,46 +58,7 @@ void drawBar(int barX, int barLength) {
     }
 }
 
-// Game function
-void runGame() {
-    srand(static_cast<unsigned int>(time(0))); 
 
-    initscr();
-    noecho();
-    cbreak();
-    keypad(stdscr, TRUE);
-    curs_set(0);
-    nodelay(stdscr, TRUE);
-    timeout(30); 
-
-    int barX = 10;     
-    int barLength = 10; 
-    Ball ball;
-    initializeBall(ball);
-
-    while (true) {
-        clear(); 
-
-        
-        drawBar(barX, barLength);
-
-       
-        moveBall(ball, barX, barLength);
-        mvaddch(ball.y, ball.x, 'O');
-
-        refresh(); 
-
-        int ch = getch(); 
-        if (ch == KEY_LEFT) {
-            if (barX > 0) barX -= 5;
-        } else if (ch == KEY_RIGHT) {
-            if (barX + barLength < COLS) barX += 5; 
-        } else if (ch == 'q') {
-            break;
-        }
-
-        usleep(10000); 
-    }
 
     endwin(); // End ncurses mode
 }
