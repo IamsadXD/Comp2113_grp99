@@ -14,7 +14,7 @@ private:
     int menu_h = 30; 
     int menu_w = 150; // height and width of menu are deifned here 
 
-    std::string title[5] = { // ASCII Art of title name to be displayed in menu 
+    string title[5] = { // ASCII Art of title name to be displayed in menu 
         " _______                          __           __ __ ", 
         "|   _   |.-----.-----.----.--.--.|  |--.---.-.|  |  |",
         "|       ||     |  _  |   _|  |  ||  _  |  _  ||  |  |",
@@ -26,7 +26,7 @@ private:
 public:
     Menu();  
     int display_options();  
-    std::string input_name(int menu_w, int menu_h);
+    string input_name(int menu_w, int menu_h);
     void game_info(int y_max, int x_max); 
     void play_instructions(int y_max, int x_max); 
 };
