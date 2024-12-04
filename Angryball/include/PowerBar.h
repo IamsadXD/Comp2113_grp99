@@ -3,11 +3,10 @@
 
 // Power Bar structure with a constructor
 struct PowerBar {
-    int length;    // Length of the power bar
-    int maxLength; // Maximum length of the bar
-    int x, y;      // Position of the bar
+    int length;    // Current length of the power bar
+    int maxLength; // Maximum length of the power bar
+    int x, y;      // Position of the power bar
 
-    // Constructor for initializing the power bar
     PowerBar(int length, int maxLength, int x, int y)
         : length(length), maxLength(maxLength), x(x), y(y) {}
 };
@@ -22,8 +21,7 @@ public:
 
     void draw() const; // Draw the power bar
     void update(int delta); // Update the power bar's length
-    bool isFull() const; // Check if the bar is full
-    void reset(); // Reset the power bar
+    void reset(); // Reset the power bar to initial length
 };
 
 #endif // POWERBAR_H
