@@ -4,6 +4,7 @@
 #include <ctime>
 #include "../include/BallCollision.h"
 #include "../include/BrickGenerator.h"
+#include "../include/Scoreboard.h"
 
 void initializeBall(Ball &ball, int barX, int barLength) {
     ball.x = barX + barLength / 2; // Place the ball in the middle of the bar
@@ -12,7 +13,7 @@ void initializeBall(Ball &ball, int barX, int barLength) {
     ball.dirY = 0;                 // Initially, the ball is not moving
 }
 
-void moveBall(Ball &ball, int barX, int barLength, BrickGenerator &brickGen, bool& outofbounds, int& brickType) {
+void moveBall(Ball &ball, int barX, int barLength, BrickGenerator &brickGen, bool& outofbounds, int& brickType, Scoreboard &scoreboard) {
     ball.x += ball.dirX;
     ball.y += ball.dirY;
 
@@ -46,6 +47,7 @@ void moveBall(Ball &ball, int barX, int barLength, BrickGenerator &brickGen, boo
             }
             it->active = false; // Remove the brick
             it = brickGen.bricks.erase(it); // Erase the brick from the vector
+            scoreboard.inc_score(1); // Increase the score
         } else {
             ++it; // Move to the next brick
         }

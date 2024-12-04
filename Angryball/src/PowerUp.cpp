@@ -14,7 +14,6 @@ void PowerUp::applyPowerUp(int &lives, int &barLength, bool &reset)
         // Controlled Movement (Placeholder, as no specific logic is provided)
         reset = true;
         lastEffect = "Controlled Movement";
-        std::cout << "Controlled Movement effect applied." << std::endl;
         break;
     case 1:
         if (lives == 3){
@@ -22,7 +21,6 @@ void PowerUp::applyPowerUp(int &lives, int &barLength, bool &reset)
         }
         lives += 1; // Increase lives by 1
         lastEffect = "Regen Lives";
-        std::cout << "Regen Lives effect applied." << std::endl;
         break;
     case 2:
         if (barLength > 60){
@@ -30,7 +28,6 @@ void PowerUp::applyPowerUp(int &lives, int &barLength, bool &reset)
         }
         barLength += 1 + rand() % 5; // Randomly increase bar length from 1 to 5
         lastEffect = "Longer Power Bar";
-        std::cout << "Longer Power Bar effect applied." << std::endl;
         break;
     }
 }

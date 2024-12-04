@@ -19,13 +19,11 @@ void PowerDown::applyPowerDown(double &speed, int &barLength)
             double max = 1.75;
             speed = speed / (min + (max - min) * (static_cast<double>(rand()) / RAND_MAX)); // Increasing speed from 1.25 times to 1.75 times
             lastEffect = "Extreme Speeds";
-            std::cout << "Extreme Speeds effect applied." << std::endl;
             break;
         }
     case 1:
         barLength -= 1 + rand() % 5; // Randomly decrease bar length from 1 to 5
         lastEffect = "Shorter Power Bar";
-        std::cout << "Shorter Power Bar effect applied." << std::endl;
         break;
     }
 }

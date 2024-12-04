@@ -47,14 +47,18 @@ void game(const std::string& player_name) {
             ball.x = barX + barLength / 2; // Keep the ball on the bar
             mvaddch(ball.y, ball.x, 'O'); // Draw the ball
         } else {
-            moveBall(ball, barX, barLength, brickGen, outofbounds, brickType);
+            moveBall(ball, barX, barLength, brickGen, outofbounds, brickType, scoreboard);
             mvaddch(ball.y, ball.x, 'O'); // Draw the ball
         }
 
+        scoreboard.display(lives, player_name); // Display the scoreboard
+
         refresh(); // Refresh the screen to show changes
+
         if (outofbounds) {
             lives--; // Decrease lives if ball falls below the screen
             outofbounds = false;
+            refresh();
             ballOnBar = true; // Reset the ball to be on the bar
             initializeBall(ball, barX, barLength);
         }
@@ -84,6 +88,7 @@ void game(const std::string& player_name) {
             ball.dirY = -1;
             ballOnBar = false; // Ball is now in motion
         } else if (ch == 'q') {
+            scoreboard.store_score(player_name);
             clear();
             return; // Quit on 'q'
         }
@@ -91,6 +96,7 @@ void game(const std::string& player_name) {
         usleep(speed); // Sleep for a short time (default 10ms)
         
         if (lives <= 0) {
+            scoreboard.store_score(player_name);
             break; // End the game if no lives left
         }
     }
