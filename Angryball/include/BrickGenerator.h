@@ -24,6 +24,9 @@ public:
 
     // Draw the bricks on the screen
     void drawBricks() const;
+
+    // Check if all bricks are destroyed
+    bool areAllBricksDestroyed() const;
 };
 
 #endif // BRICKGENERATOR_H
