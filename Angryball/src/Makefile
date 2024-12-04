@@ -1,18 +1,19 @@
-FLAGS = -pedantic-errors -std=c++11
+CXX = g++
+CXXFLAGS = -std=c++11
+TARGET = angryball
+SRCS = BallCollision.cpp BrickGenerator.cpp HigestScore.cpp \
+       main.cpp Menu.cpp PowerDown.cpp \
+       PowerUp.cpp ScoreBoard.cpp
+INCLUDES = -Iinclude -I../ncurses/include/ncursesw -I../ncurses/include
+LIBS = -L../ncurses/lib -lncursesw
 
-main: BallCollision.o BrickGenerator.o main.o
-	g++ $(FLAGS) BallCollision.o BrickGenerator.o main.o -o main -lncurses
+# Default target
+all: $(TARGET)
 
-main.o: main.cpp ../include/BallCollision.h ../include/BrickGenerator.h
-	g++ $(FLAGS) -c main.cpp
+# Build the target
+$(TARGET): $(SRCS)
+	$(CXX) $(CXXFLAGS) -o $@ $^ $(INCLUDES) $(LIBS)
 
-BallCollision.o: BallCollision.cpp ../include/BallCollision.h ../include/BrickGenerator.h
-	g++ $(FLAGS) -c BallCollision.cpp
-
-BrickGenerator.o: BrickGenerator.cpp ../include/BrickGenerator.h
-	g++ $(FLAGS) -c BrickGenerator.cpp
-
+# Clean up build files
 clean:
-	rm -f main BallCollision.o BrickGenerator.o main.o
-
-.PHONY: clean
+	rm -f $(TARGET)

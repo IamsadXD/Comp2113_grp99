@@ -8,7 +8,6 @@
 
 int main() {
     srand(static_cast<unsigned int>(time(0))); // Seed the random number generator
-
     initscr();
     noecho();
     cbreak();
@@ -17,8 +16,11 @@ int main() {
     nodelay(stdscr, TRUE);
     timeout(30); // Set a timeout for getch()
 
+    // Initialization
+    int speed = 10000; // Adjust speed of ball by sleep time
     int barX = 10;      // Initial position of the bar
     int barLength = 10; // Length of the bar
+    int lives = 3;     // Number of lives
     Ball ball;
     initializeBall(ball);
     BrickGenerator brickGen(10, 20, 70, 10, 1, 1); // Adjust parameters as needed
@@ -47,7 +49,11 @@ int main() {
             break; // Quit on 'q'
         }
 
-        usleep(10000); // Sleep for a short time (10ms)
+        usleep(speed); // Sleep for a short time (default 10ms)
+        
+        if (lives <= 0) {
+            break; // End the game if no lives left
+        }
     }
 
     endwin(); // End ncurses mode
