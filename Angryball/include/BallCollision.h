@@ -11,6 +11,5 @@ struct Ball {
 void initializeBall(Ball &ball);
 void moveBall(Ball &ball, int barX, int barLength);
 void drawBar(int barX, int barLength);
-void runGame();
 
 #endif 
