@@ -12,7 +12,6 @@ void BrickGenerator::generateBricks() {
     for (int row = 0; row < rows; ++row) {
         for (int col = 0; col < cols; ++col) {
             bool isSpecialBrick = false;
-            bool isActive = rand() % 2 == 0; // 50% chance for each brick to be active
 
             // 70% chance for a normal brick
             if (rand() % 10 < 7) {
@@ -20,7 +19,8 @@ void BrickGenerator::generateBricks() {
                 isSpecialBrick = rand() % 10 < 3; // 30% chance for special brick inside normal bricks
             }
 
-            bricks.push_back({startX + col * spacingX, startY + row * spacingY, isActive, isSpecialBrick});
+            // Add the brick with active set to true (always active)
+            bricks.push_back({startX + col * spacingX, startY + row * spacingY, true, isSpecialBrick});
         }
     }
 }
