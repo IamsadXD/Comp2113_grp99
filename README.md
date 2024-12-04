@@ -12,8 +12,8 @@
 - Scoreboard (Bricks destroyed) (Omaya)
 - Brick generation (William)
 - Power bar (William)
-- Powerups (Increase size of ball, controlled movement, extra lives, longer power bar) (Jacob)
-- Powerdowns (Extreme speeds, shorter power bar, decrease size of ball, reduce extra lives) (Jacob)
+- Powerups (Controlled movement, regenerate lost lives, longer power bar) (Jacob)
+- Powerdowns (Extreme speeds, shorter power bar) (Jacob)
 - Ball collision (Rayan)
 - Audio (Rayan)
 
