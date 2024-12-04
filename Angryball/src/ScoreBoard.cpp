@@ -1,10 +1,11 @@
 #include "scoreboard.h"
+using namespace std;
 
 void Scoreboard::display() {
-    std::cout << "Scoreboard:\n";
-    std::cout << "Score: " << score << "\n";
+    cout << "Scoreboard:\n";
+    cout << "Score: " << score << "\n";
 }
 
-void Scoreboard::addScore(int num_bricks) {
+void Scoreboard::inc_score(int num_bricks) {
     score += num_bricks;
 }
