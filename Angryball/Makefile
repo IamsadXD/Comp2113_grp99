@@ -1,7 +1,7 @@
 CXX = g++
 CXXFLAGS = -std=c++11 -Iinclude
 TARGET = angryball
-SRCS = src/Audio.cpp src/BallCollision.cpp src/BrickGenerator.cpp src/HigestScore.cpp \
+SRCS = src/BallCollision.cpp src/BrickGenerator.cpp src/HigestScore.cpp \
        src/main.cpp src/Menu.cpp src/PowerBar.cpp src/PowerDown.cpp \
        src/PowerUp.cpp src/ScoreBoard.cpp
 LIBS = -L../ncurses/lib -lncurses
