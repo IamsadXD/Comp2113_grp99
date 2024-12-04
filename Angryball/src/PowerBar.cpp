@@ -7,23 +7,26 @@ void PowerBarRenderer::draw() const {
     mvaddch(bar.y, bar.x, '[');
 
     // Draw the power bar itself with '=' between the fixed positions
-    for (int i = 1; i <= bar.length; ++i) { // Start drawing after the minimum point
-        mvaddch(bar.y, bar.x + i, '=');
+    for (int i = 0; i < bar.length; ++i) { // Start drawing after the minimum point
+        mvaddch(bar.y, bar.x + i + 1, '=');
     }
 
     // Draw the maximum point of the power bar with ']' at a fixed position
-    mvaddch(bar.y, bar.x + bar.maxLength, ']');
+    mvaddch(bar.y, bar.x + bar.maxLength + 1, ']');
 }
 
 // Update the power bar's length based on the input (delta)
 void PowerBarRenderer::update(int delta) {
     bar.length += delta;
 
+    // If the bar exceeds the max length, reset it to 2
     if (bar.length > bar.maxLength) {
-        bar.length = bar.maxLength; // Cap the bar at the maximum length
+        bar.length = 2;
     }
-    if (bar.length < 1) {
-        bar.length = 0; // Minimum bar length set to 0
+
+    // Ensure the bar length doesn't go below 0
+    if (bar.length < 0) {
+        bar.length = 0;
     }
 }
 
