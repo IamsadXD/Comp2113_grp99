@@ -5,8 +5,8 @@
 
 // Brick structure with added isSpecialBrick flag
 struct Brick {
-    int x, y;          // Position of the brick
-    bool active;       // Whether the brick is active or destroyed
+    int x, y;           // Position of the brick
+    bool active;        // Whether the brick is active or destroyed
     bool isSpecialBrick; // Whether the brick is special (e.g., + or -)
 };
 
