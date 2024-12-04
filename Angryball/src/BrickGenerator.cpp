@@ -1,4 +1,4 @@
-#include "BrickGenerator.h"
+#include "../include/BrickGenerator.h"
 #include <cstdlib>
 #include <ncurses.h>
 
@@ -15,7 +15,7 @@ void BrickGenerator::generateBricks() {
             bool isActive = rand() % 2 == 0; // 50% chance for each brick to be active
 
             // 70% chance for a normal brick
-            if (rand() % 10 < 7) {
+            if (rand() % 10 < 9) {
                 // Inside the normal brick, 30% chance for it to be special (either + or -)
                 isSpecialBrick = rand() % 10 < 3; // 30% chance for special brick inside normal bricks
             }

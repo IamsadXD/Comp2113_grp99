@@ -1,3 +1,11 @@
+#include <ncurses.h>
+#include <unistd.h>
+#include <cstdlib>
+#include <ctime>
+#include "../include/BallCollision.h"
+#include "../include/BrickGenerator.h"
+
+
 int main() {
     srand(static_cast<unsigned int>(time(0))); // Seed the random number generator
 
@@ -13,17 +21,19 @@ int main() {
     int barLength = 10; // Length of the bar
     Ball ball;
     initializeBall(ball);
-
+    BrickGenerator brickGen(10, 20, 70, 10, 1, 1); // Adjust parameters as needed
+    brickGen.generateBricks(); // Generate bricks
     while (true) {
         clear(); // Clear the screen
-
         // Draw the bar
+        brickGen.drawBricks();
         for (int i = 0; i < barLength; ++i) {
             mvaddch(LINES - 1, barX + i, '#'); // Draw the bar at the bottom
         }
 
+
         // Move and draw the ball
-        moveBall(ball, barX, barLength);
+        moveBall(ball, barX, barLength, brickGen);
         mvaddch(ball.y, ball.x, 'O'); // Draw the ball
 
         refresh(); // Refresh the screen to show changes
