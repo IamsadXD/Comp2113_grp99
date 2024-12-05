@@ -3,7 +3,6 @@
 #include <string>
 #include "../include/Menu.h"
 #include "../include/game.h"
-
 using namespace std; 
 
 Menu::Menu() {
@@ -23,7 +22,6 @@ int Menu::display_options() {
     }   
 
     wrefresh(menuwin);
-
     keypad(menuwin, true);
 
     string options[4] = {"Start Game", "Game Info", "How to Play", "Exit Game"};
@@ -92,7 +90,6 @@ void Menu::game_info(int y_max, int x_max) {
     mvwprintw(game_info_win, 9, 3, "Press any key to return.");
 
     wrefresh(game_info_win);
-
     wgetch(game_info_win);
     flushinp(); // Flush the input buffer
 
