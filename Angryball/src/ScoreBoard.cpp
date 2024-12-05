@@ -27,10 +27,16 @@ void Scoreboard::inc_score(int num_bricks) {
 }
 
 void Scoreboard::store_score(std::string player_name) {
-    std::ifstream infile("data/highestScore.txt");
+    std::ifstream infile("Angryball/data/highestScore.txt");
+    if (!infile) {
+        mvprintw(5, 0, "Error opening file for reading!");
+        return;
+    }
+
     std::map<std::string, int> scores;
     std::string line;
 
+    // Read existing scores
     while (std::getline(infile, line)) {
         std::istringstream iss(line);
         std::string name;
@@ -47,19 +53,21 @@ void Scoreboard::store_score(std::string player_name) {
     }
 
     // Write updated scores back to the file
-    std::ofstream outfile("data/highestScore.txt");
+    std::ofstream outfile("Angryball/data/highestScore.txt");
     if (!outfile) {
-        mvprintw(5, 0, "Error opening file!"); // Adjusted line number for error message
-    } else {
-        for (const auto& entry : scores) {
-            outfile << entry.first << " " << entry.second << std::endl;
-        }
-        outfile.close();
+        mvprintw(5, 0, "Error opening file for writing!");
+        return;
     }
+
+    for (const auto& entry : scores) {
+        outfile << entry.first << " " << entry.second << std::endl;
+    }
+    outfile.close();
 }
 
 void Scoreboard::display_highest_score() {
-    std::ifstream infile("data/highestScore.txt");
+    std::ifstream infile("Angryball/data/highestScore.txt");
+
     std::string line;
     std::string highest_score_player;
     int highest_score = 0;
