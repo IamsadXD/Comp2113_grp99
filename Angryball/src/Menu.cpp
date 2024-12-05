@@ -34,8 +34,8 @@ void draw_custom_border(WINDOW* win) {
 }
 
 int Menu::display_options() {
-    int menu_h = LINES;  
-    int menu_w = COLS;
+    int menu_h = LINES - 1;  
+    int menu_w = COLS - 1;
     menuwin = newwin(menu_h, menu_w, 1, 1);
     draw_custom_border(menuwin);
     
@@ -153,8 +153,8 @@ void Menu::play_instructions(int y_max, int x_max) {
 
 
 string Menu::input_name() {
-    int menu_h = LINES;  
-    int menu_w = COLS;
+    int menu_h = LINES - 1;  
+    int menu_w = COLS - 1;
     char player_name[50];  
     WINDOW* input_name_win = newwin(5, 70, (menu_h) / 2, (menu_w - 70) / 2);
     draw_custom_border(input_name_win);
