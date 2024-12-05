@@ -1,6 +1,5 @@
 #ifndef POWERUP_H
 #define POWERUP_H
-
 #include <string>
 
 class PowerUp
