@@ -72,6 +72,9 @@ int Menu::display_options() {
             case 10: // Enter key
                 if(highlight == 0) {
                     string player_name = input_name(menu_w, menu_h);
+                    if (player_name.empty()) {
+                        player_name = "Player";
+                    }
                     game(player_name);
                 } else if(highlight == 1) {
                     int y_max, x_max;
