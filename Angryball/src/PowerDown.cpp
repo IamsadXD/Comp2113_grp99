@@ -22,6 +22,9 @@ void PowerDown::applyPowerDown(double &speed, int &barLength)
             break;
         }
     case 1:
+        if (barLength < 5){
+            break;
+        }
         barLength = barLength - (1 + rand() % 5); // Randomly decrease bar length from 1 to 5
         lastEffect = "Shorter Power Bar";
         break;

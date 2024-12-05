@@ -32,6 +32,7 @@ void game(const std::string& player_name) {
     int barLength = 15; // Length of the bar
     int lives = 3;     // Number of lives
     int brickType = 0; // Type of brick
+    string lastEffect = "None";
     bool outofbounds = false;
     bool reset = false;
     bool ballOnBar = true; // Track if the ball is on the bar
@@ -64,7 +65,7 @@ void game(const std::string& player_name) {
             mvaddch(ball.y, ball.x, 'O'); // Draw the ball
         }
 
-        scoreboard.display(lives, player_name); // Display the scoreboard
+        scoreboard.display(lives, player_name, lastEffect); // Display the scoreboard
 
         refresh(); // Refresh the screen to show changes
 
@@ -74,6 +75,29 @@ void game(const std::string& player_name) {
             refresh();
             ballOnBar = true; // Reset the ball to be on the bar
             initializeBall(ball, barX, barLength);
+        }
+
+        // Checking for powerups and powerdowns
+         switch(brickType) {
+            case 1:
+                powerUp.applyPowerUp(lives, barLength, reset);
+                brickType = 0;
+                if (reset){
+                    ballOnBar = true; // Reset the ball to be on the bar
+                    initializeBall(ball, barX, barLength);
+                    reset = false;
+                    lastEffect = powerUp.getPowerUp();
+                    scoreboard.display(lives, player_name, lastEffect);
+                }
+                break;
+            case 2:
+                powerDown.applyPowerDown(speed, barLength);
+                brickType = 0;
+                lastEffect = powerDown.getPowerDown();
+                scoreboard.display(lives, player_name, lastEffect);
+                break;
+            default:
+                break;
         }
 
         // Check game over condition

@@ -5,18 +5,21 @@
 #include <sstream>
 #include <map>
 
-void Scoreboard::display(int lives, std::string player_name) {
+void Scoreboard::display(int lives, std::string player_name, std::string lastEffect) {
     // Draw the top border of the scoreboard
     mvprintw(0, 0, "----------- Scoreboard -----------");
 
     // Display player information
     mvprintw(1, 0, "Player: %s | Score: %d | Lives: %d", player_name.c_str(), score, lives);
+
+    // Display the last effect
+    mvprintw(2, 0, "Last Effect: %s", lastEffect.c_str());
     
     // Display the highest score on the next line
     display_highest_score();
 
     // Draw the bottom border of the scoreboard
-    mvprintw(3, 0, "----------------------------------");
+    mvprintw(4, 0, "----------------------------------");
 }
 
 void Scoreboard::inc_score(int num_bricks) {
@@ -78,8 +81,8 @@ void Scoreboard::display_highest_score() {
 
     // Display the highest score on the next line
     if (highest_score_player.empty()) {
-        mvprintw(2, 0, "Highest Score: NA");
+        mvprintw(3, 0, "Highest Score: NA");
     } else {
-        mvprintw(2, 0, "Highest Score: %s - %d", highest_score_player.c_str(), highest_score);
+        mvprintw(3, 0, "Highest Score: %s - %d", highest_score_player.c_str(), highest_score);
     }
 }

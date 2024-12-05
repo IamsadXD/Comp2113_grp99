@@ -4,7 +4,7 @@ TARGET = angryball
 SRCS = src/BallCollision.cpp src/BrickGenerator.cpp src/main.cpp \
 	src/Menu.cpp src/PowerDown.cpp src/PowerUp.cpp src/ScoreBoard.cpp src/game.cpp
 INCLUDES = -Iinclude -Incurses/include/ncursesw -Incurses/include
-LIBS = -Lncurses/lib -lncurses
+LIBS = -Lncurses/lib -lncursesw
 #Change -lncurses to -lncursesw if needed, the former works in mac
 
 # Default target
