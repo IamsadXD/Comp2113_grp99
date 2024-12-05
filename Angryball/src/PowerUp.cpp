@@ -6,7 +6,7 @@ PowerUp::PowerUp(Type type) : type(type), lastEffect("None") {}
 
 void PowerUp::applyPowerUp(int &lives, int &barLength, bool &reset)
 {
-    int randomEffect = rand() % 3; // Randomly choose an effect (0, 1, or 2)
+    int randomEffect = rand() % 2; // Randomly choose an effect (0, 1, or 2)
 
     switch (randomEffect)
     {
@@ -26,7 +26,7 @@ void PowerUp::applyPowerUp(int &lives, int &barLength, bool &reset)
         if (barLength > 60){
             break;
         }
-        barLength += 1 + rand() % 5; // Randomly increase bar length from 1 to 5
+        barLength += 5; // Randomly increase bar length from 1 to 5
         lastEffect = "Longer Power Bar";
         break;
     }

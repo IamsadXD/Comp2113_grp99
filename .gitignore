@@ -1,4 +1,5 @@
 Angryball/ncurses/share/terminfo/*
 **/.DS_Store
 .vscode/*
-Angryball/data/*
+Angryball/data/highestScore.txt
+Angryball/angryball

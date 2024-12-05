@@ -5,14 +5,21 @@
 #include <sstream>
 #include <map>
 
-void Scoreboard::display(int lives, std::string player_name) {
-    mvprintw(0, 0, "Scoreboard:");
-    mvprintw(1, 0, "Player: %s", player_name.c_str());
-    mvprintw(2, 0, "Score: %d", score);
-    mvprintw(3, 0, "Lives: %d", lives);
+void Scoreboard::display(int lives, std::string player_name, std::string lastEffect) {
+    // Draw the top border of the scoreboard
+    mvprintw(0, 0, "----------- Scoreboard -----------");
 
-    // Display the highest score
+    // Display player information
+    mvprintw(1, 0, "Player: %s | Score: %d | Lives: %d", player_name.c_str(), score, lives);
+
+    // Display the last effect
+    mvprintw(2, 0, "Last Effect: %s", lastEffect.c_str());
+    
+    // Display the highest score on the next line
     display_highest_score();
+
+    // Draw the bottom border of the scoreboard
+    mvprintw(4, 0, "----------------------------------");
 }
 
 void Scoreboard::inc_score(int num_bricks) {
@@ -20,7 +27,7 @@ void Scoreboard::inc_score(int num_bricks) {
 }
 
 void Scoreboard::store_score(std::string player_name) {
-    std::ifstream infile("../data/highestScore.txt");
+    std::ifstream infile("data/highestScore.txt");
     std::map<std::string, int> scores;
     std::string line;
 
@@ -41,9 +48,9 @@ void Scoreboard::store_score(std::string player_name) {
     }
 
     // Write updated scores back to the file
-    std::ofstream outfile("../data/highestScore.txt");
+    std::ofstream outfile("data/highestScore.txt");
     if (!outfile) {
-        mvprintw(4, 0, "Error opening file!");
+        mvprintw(5, 0, "Error opening file!"); // Adjusted line number for error message
     } else {
         for (const auto& entry : scores) {
             outfile << entry.first << " " << entry.second << std::endl;
@@ -53,7 +60,7 @@ void Scoreboard::store_score(std::string player_name) {
 }
 
 void Scoreboard::display_highest_score() {
-    std::ifstream infile("../data/highestScore.txt");
+    std::ifstream infile("data/highestScore.txt");
     std::string line;
     std::string highest_score_player;
     int highest_score = 0;
@@ -72,6 +79,10 @@ void Scoreboard::display_highest_score() {
     }
     infile.close();
 
-    // Display the highest score
-    mvprintw(4, 0, "Highest Score: %s-%d", highest_score_player.c_str(), highest_score);
+    // Display the highest score on the next line
+    if (highest_score_player.empty()) {
+        mvprintw(3, 0, "Highest Score: NA");
+    } else {
+        mvprintw(3, 0, "Highest Score: %s - %d", highest_score_player.c_str(), highest_score);
+    }
 }

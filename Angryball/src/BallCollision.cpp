@@ -22,7 +22,7 @@ void moveBall(Ball &ball, int barX, int barLength, BrickGenerator &brickGen, boo
         ball.dirX *= -1; 
     }
 
-    if (ball.y <= 0) {
+    if (ball.y <= 6) {
         ball.dirY *= -1; 
     }
 
@@ -61,8 +61,3 @@ void moveBall(Ball &ball, int barX, int barLength, BrickGenerator &brickGen, boo
     }
 }
 
-void drawBar(int barX, int barLength) {
-    for (int i = 0; i < barLength; ++i) {
-        mvaddch(LINES - 1, barX + i, '#'); 
-    }
-}
