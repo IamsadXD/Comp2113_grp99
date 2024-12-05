@@ -5,6 +5,7 @@
 #include "../include/game.h"
 using namespace std; 
 
+//initialize the menu
 Menu::Menu() {
     initscr();
     noecho();
@@ -33,12 +34,14 @@ void draw_custom_border(WINDOW* win) {
     }
 }
 
+//to display menu options for user to select from
 int Menu::display_options() {
     int menu_h = LINES - 1;  
     int menu_w = COLS - 1;
-    menuwin = newwin(menu_h, menu_w, 1, 1);
+    menuwin = newwin(menu_h, menu_w, 1, 1); //to create a new window for the menu
     draw_custom_border(menuwin);
-    
+
+    //to print the ascii art from menu.h 
     for (int i = 0; i < 5; i++) {
         mvwprintw(menuwin, i + 5, 3, "%s", title[i].c_str());
     }
@@ -47,7 +50,7 @@ int Menu::display_options() {
     keypad(menuwin, true);
 
     string options[4] = {"Start Game", "Game Info", "How to Play", "Exit Game"};
-    int highlight = 0;
+    int highlight = 0; //currently highlighted option
 
     while (true) {
         for (int i = 0; i < 4; i++) {
@@ -61,33 +64,34 @@ int Menu::display_options() {
 
         int ch = wgetch(menuwin);
         switch (ch) {
-            case KEY_UP:
+            case KEY_UP: //if arrow up key is pressed
                 highlight--;
                 if (highlight < 0) {
-                    highlight = 3;
+                    highlight = 3;//wrap around to the last option so user wont go out of bounds
                 }
                 break;
-            case KEY_DOWN:
+            case KEY_DOWN: // if arrow down key is pressed
                 highlight++;
                 if (highlight > 3) {
-                    highlight = 0;
+                    highlight = 0;//wrap around to the first option so user wont go out of bounds
                 }
                 break;
-            case 10: // Enter key
+            case 10: // Enter key pressed
+                //call respective functions for selected option
                 if (highlight == 0) {
-                    string player_name = input_name();
+                    string player_name = input_name(); 
                     if (player_name.empty()) {
                         player_name = "Player";
                     }
-                    game(player_name); // Ensure this function is properly defined
+                    game(player_name); // start the game  
                 } else if (highlight == 1) {
                     int y_max, x_max;
                     getmaxyx(stdscr, y_max, x_max);
-                    game_info(y_max, x_max);
+                    game_info(y_max, x_max); //display game info
                 } else if (highlight == 2) {
                     int y_max, x_max;
                     getmaxyx(stdscr, y_max, x_max);
-                    play_instructions(y_max, x_max);
+                    play_instructions(y_max, x_max); //display instructions
                 } else if (highlight == 3) {
                     wclear(menuwin);
                     wrefresh(menuwin);
@@ -104,8 +108,9 @@ int Menu::display_options() {
 
 
 void Menu::game_info(int y_max, int x_max) {
-    WINDOW* game_info_win = newwin(15, 70, (y_max - 15) / 2, (x_max - 70) / 2);
+    WINDOW* game_info_win = newwin(15, 70, (y_max - 15) / 2, (x_max - 70) / 2); //create a new window to display game info
     draw_custom_border(game_info_win);
+    // display the information on the screen
     mvwprintw(game_info_win, 2, 3, "About the game:");
     mvwprintw(game_info_win, 4, 3, "Welcome to Angryball!");
     mvwprintw(game_info_win, 5, 3, "Version: 1.0");
@@ -118,6 +123,7 @@ void Menu::game_info(int y_max, int x_max) {
     wgetch(game_info_win);
     flushinp(); // Flush the input buffer
 
+    //clear and delete the window
     werase(game_info_win);
     wrefresh(game_info_win);
     delwin(game_info_win);
@@ -128,8 +134,9 @@ void Menu::game_info(int y_max, int x_max) {
 }
 
 void Menu::play_instructions(int y_max, int x_max) {
-    WINDOW* play_instructions_win = newwin(15, 70, (y_max - 15) / 2, (x_max - 70) / 2);
+    WINDOW* play_instructions_win = newwin(15, 70, (y_max - 15) / 2, (x_max - 70) / 2); //create a new window to display game instuctions
     draw_custom_border(play_instructions_win);
+    //print the game rules
     mvwprintw(play_instructions_win, 2, 3, "Game Instructions:");
     mvwprintw(play_instructions_win, 4, 3, "1. Navigate the power bar using the arrow keys");
     mvwprintw(play_instructions_win, 5, 3, "2. Strike the bricks to earn points");
@@ -162,7 +169,7 @@ string Menu::input_name() {
     wrefresh(input_name_win);
 
     echo();
-    
+    //get the input name 
     wgetnstr(input_name_win, player_name, sizeof(player_name) - 1);  
     
     noecho();
