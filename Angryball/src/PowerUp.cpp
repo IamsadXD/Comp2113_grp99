@@ -1,21 +1,16 @@
 #include "../include/PowerUp.h"
 #include <iostream>
-#include <cstdlib> // For rand() and RAND_MAX
+#include <cstdlib> 
 
 PowerUp::PowerUp(Type type) : type(type), lastEffect("None") {}
 
 void PowerUp::applyPowerUp(int &lives, int &barLength, bool &reset)
 {
-    int randomEffect = rand() % 3; // Randomly choose an effect (0, 1, or 2)
+    int randomEffect = rand() % 2; // Randomly choose an effect (0, or 1)
 
     switch (randomEffect)
     {
     case 0:
-        // Controlled Movement (Placeholder, as no specific logic is provided)
-        reset = true;
-        lastEffect = "Controlled Movement";
-        break;
-    case 1:
         if (lives == 3){
             break;
         }
