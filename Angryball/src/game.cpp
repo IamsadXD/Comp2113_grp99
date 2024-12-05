@@ -9,7 +9,7 @@
 #include "../include/Scoreboard.h"
 
 void game(const std::string& player_name) {
-    srand(static_cast<unsigned int>(time(0))); // Seed the random number generator
+    srand(static_cast<unsigned int>(time(0))); 
     initscr();
     noecho();
     cbreak();
@@ -20,10 +20,10 @@ void game(const std::string& player_name) {
 
     // Initialization
     double speed = 20000; // Adjust speed of ball by sleep time
-    int barX = 10;      // Initial position of the bar
-    int barLength = 30; // Length of the bar
-    int lives = 3;     // Number of lives
-    int brickType = 0; // Type of brick (0=normal, 1=power-up, 2=power-down)
+    int barX = 10;      
+    int barLength = 30; 
+    int lives = 3;    
+    int brickType = 0; // Brick (0=normal, 1=power-up, 2=power-down)
     bool outofbounds = false;
     bool reset = false;
     bool ballOnBar = true; // Track if the ball is on the bar
@@ -51,15 +51,15 @@ void game(const std::string& player_name) {
             mvaddch(ball.y, ball.x, 'O'); // Draw the ball
         }
 
-        scoreboard.display(lives, player_name); // Display the scoreboard
+        scoreboard.display(lives, player_name);
 
         refresh(); // Refresh the screen to show changes
 
         if (outofbounds) {
-            lives--; // Decrease lives if ball falls below the screen
+            lives--; 
             outofbounds = false;
             refresh();
-            ballOnBar = true; // Reset the ball to be on the bar
+            ballOnBar = true; // Reset the ball
             initializeBall(ball, barX, barLength);
         }
         switch(brickType) {
@@ -67,7 +67,7 @@ void game(const std::string& player_name) {
                 powerUp.applyPowerUp(lives, barLength, reset);
                 brickType = 0;
                 if (reset){
-                    ballOnBar = true; // Reset the ball to be on the bar
+                    ballOnBar = true; 
                     initializeBall(ball, barX, barLength);
                     reset = false;
                 }
@@ -78,11 +78,11 @@ void game(const std::string& player_name) {
                 break;
         }
 
-        int ch = getch(); // Get user input
+        int ch = getch(); // Get input
         if (ch == KEY_LEFT) {
-            if (barX > 0) barX -= 5; // Move left by 5 steps
+            if (barX > 0) barX -= 5; 
         } else if (ch == KEY_RIGHT) {
-            if (barX + barLength < COLS) barX += 5; // Move right by 5 steps
+            if (barX + barLength < COLS) barX += 5; 
         } else if (ch == KEY_UP && ballOnBar) {
             ball.dirX = 0; // Set initial direction to straight up
             ball.dirY = -1;
