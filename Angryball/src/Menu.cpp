@@ -12,6 +12,10 @@ Menu::Menu() {
     keypad(stdscr, TRUE);
 }
 
+Menu::~Menu() {
+    endwin();  // Clean up ncurses and reset terminal
+}
+
 void draw_custom_border(WINDOW* win) {
     int max_y, max_x;
     getmaxyx(win, max_y, max_x); // Get the dimensions of the window

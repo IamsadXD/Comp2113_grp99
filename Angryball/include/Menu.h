@@ -21,7 +21,8 @@ private:
     };
 
 public:
-    Menu();  
+    Menu(); 
+    ~Menu(); 
     int display_options();  
     string input_name(int menu_w, int menu_h);
     void game_info(int y_max, int x_max); 
