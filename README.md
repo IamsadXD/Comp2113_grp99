@@ -32,7 +32,8 @@
 - ncurses: enhances the user interface by providing text-based graphics and controls in a terminal environment 
 
 ## Compilation and Execution Instructions
-export TERMINFO=Angryball/ncurses/share/terminfo \
-make -C Angryball \
+```sh
+export TERMINFO=Angryball/ncurses/share/terminfo
+make -C Angryball
 Angryball/angryball
 
