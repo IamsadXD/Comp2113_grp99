@@ -31,7 +31,6 @@ void Scoreboard::store_score(std::string player_name) {
     std::map<std::string, int> scores;
     std::string line;
 
-    // Read existing scores
     while (std::getline(infile, line)) {
         std::istringstream iss(line);
         std::string name;
