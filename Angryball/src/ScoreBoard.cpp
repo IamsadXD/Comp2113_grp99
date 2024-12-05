@@ -11,7 +11,6 @@ void Scoreboard::display(int lives, std::string player_name) {
     mvprintw(2, 0, "Score: %d", score);
     mvprintw(3, 0, "Lives: %d", lives);
 
-    // Display the highest score
     display_highest_score();
 }
 
@@ -72,6 +71,5 @@ void Scoreboard::display_highest_score() {
     }
     infile.close();
 
-    // Display the highest score
     mvprintw(4, 0, "Highest Score: %s-%d", highest_score_player.c_str(), highest_score);
 }
