@@ -32,4 +32,4 @@
 - ncurses: enhances the user interface by providing text-based graphics and controls in a terminal environment 
 
 ## Compilation and Execution Instructions
-export TERMINFO=../ncurses/share/terminfo
+export TERMINFO=/ncurses/share/terminfo
