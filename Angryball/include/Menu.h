@@ -1,19 +1,14 @@
 #ifndef MENU_H
 #define MENU_H
-
 #include <string>  
 #include <ncurses.h> // access to ncurses lib which allows programmers to create textual user interfaces
-
-
 using namespace std;
 
 class Menu {
 private:
     WINDOW * menuwin;  
-
     int menu_h = 30; 
-    int menu_w = 150; // height and width of menu are deifned here 
-
+    int menu_w = 150; // height and width of menu
     string title[5] = { // ASCII Art of title name to be displayed in menu 
         " _______                          __           __ __ ", 
         "|   _   |.-----.-----.----.--.--.|  |--.---.-.|  |  |",
