@@ -7,10 +7,10 @@
 #include "../include/Scoreboard.h"
 
 void initializeBall(Ball &ball, int barX, int barLength) {
-    ball.x = barX + barLength / 2; // Place the ball in the middle of the bar
+    ball.x = barX + barLength / 2; // Place the ball in the bar's middle
     ball.y = LINES - 2;            // Place the ball just above the bar
     ball.dirX = 0;                 // Initially, the ball is not moving
-    ball.dirY = 0;                 // Initially, the ball is not moving
+    ball.dirY = 0;                 
 }
 
 void moveBall(Ball &ball, int barX, int barLength, BrickGenerator &brickGen, bool& outofbounds, int& brickType, Scoreboard &scoreboard) {
@@ -21,7 +21,6 @@ void moveBall(Ball &ball, int barX, int barLength, BrickGenerator &brickGen, boo
     if (ball.x <= 0 || ball.x >= COLS - 1) {
         ball.dirX *= -1; 
     }
-
     if (ball.y <= 6) {
         ball.dirY *= -1; 
     }
