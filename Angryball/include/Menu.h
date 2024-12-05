@@ -7,9 +7,6 @@ using namespace std;
 class Menu {
 private:
     WINDOW * menuwin;  
-
-    int menu_h = LINES; 
-    int menu_w = COLS;
      // height and width of menu are defined here 
 
     string title[5] = { // ASCII Art of title name to be displayed in menu 
@@ -24,7 +21,7 @@ public:
     Menu(); 
     ~Menu(); 
     int display_options();  
-    string input_name(int menu_w, int menu_h);
+    string input_name();
     void game_info(int y_max, int x_max); 
     void play_instructions(int y_max, int x_max); 
     void custom_draw(WINDOW* win); 

@@ -34,27 +34,27 @@ void draw_custom_border(WINDOW* win) {
 }
 
 int Menu::display_options() {
-    // to display the ascii art
+    int menu_h = LINES;  
+    int menu_w = COLS;
     menuwin = newwin(menu_h, menu_w, 1, 1);
     draw_custom_border(menuwin);
     
     for (int i = 0; i < 5; i++) {
-        mvwprintw(menuwin, i + 5, 3, "%s", title[i].c_str()); // Use "%s" format specifier
-    }   
+        mvwprintw(menuwin, i + 5, 3, "%s", title[i].c_str());
+    }
 
     wrefresh(menuwin);
     keypad(menuwin, true);
 
     string options[4] = {"Start Game", "Game Info", "How to Play", "Exit Game"};
-    int option;
-    int highlight  = 0;
-    
+    int highlight = 0;
+
     while (true) {
         for (int i = 0; i < 4; i++) {
             if (i == highlight) {
-                wattron(menuwin, A_REVERSE); 
+                wattron(menuwin, A_REVERSE);
             }
-            mvwprintw(menuwin, i + 15, 3, "%s", options[i].c_str()); // Use "%s" format specifier
+            mvwprintw(menuwin, i + 15, 3, "%s", options[i].c_str());
             wattroff(menuwin, A_REVERSE);
         }
         wrefresh(menuwin);
@@ -63,36 +63,36 @@ int Menu::display_options() {
         switch (ch) {
             case KEY_UP:
                 highlight--;
-                if (highlight == -1) {
+                if (highlight < 0) {
                     highlight = 3;
                 }
                 break;
             case KEY_DOWN:
                 highlight++;
-                if (highlight == 4) {
+                if (highlight > 3) {
                     highlight = 0;
                 }
                 break;
             case 10: // Enter key
-                if(highlight == 0) {
-                    string player_name = input_name(menu_w, menu_h);
+                if (highlight == 0) {
+                    string player_name = input_name();
                     if (player_name.empty()) {
                         player_name = "Player";
                     }
-                    game(player_name);
-                } else if(highlight == 1) {
+                    game(player_name); // Ensure this function is properly defined
+                } else if (highlight == 1) {
                     int y_max, x_max;
                     getmaxyx(stdscr, y_max, x_max);
                     game_info(y_max, x_max);
-                } else if(highlight == 2) {
+                } else if (highlight == 2) {
                     int y_max, x_max;
                     getmaxyx(stdscr, y_max, x_max);
                     play_instructions(y_max, x_max);
-                } else if(highlight == 3) {
+                } else if (highlight == 3) {
                     wclear(menuwin);
                     wrefresh(menuwin);
                     delwin(menuwin);
-                    return 1;
+                    return 1; // Exit the menu
                 }
                 break;
             default:
@@ -152,7 +152,9 @@ void Menu::play_instructions(int y_max, int x_max) {
 }
 
 
-string Menu::input_name(int menu_w, int menu_h) {
+string Menu::input_name() {
+    int menu_h = LINES;  
+    int menu_w = COLS;
     char player_name[50];  
     WINDOW* input_name_win = newwin(5, 70, (menu_h) / 2, (menu_w - 70) / 2);
     draw_custom_border(input_name_win);
