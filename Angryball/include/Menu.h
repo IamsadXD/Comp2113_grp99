@@ -1,11 +1,9 @@
 #ifndef MENU_H
 #define MENU_H
-
 #include <string>  
 #include <ncurses.h> // access to ncurses lib which allows programmers to create textual user interfaces
 
 using namespace std;
-
 class Menu {
 private:
     WINDOW * menuwin;  
@@ -28,7 +26,7 @@ public:
     string input_name(int menu_w, int menu_h);
     void game_info(int y_max, int x_max); 
     void play_instructions(int y_max, int x_max); 
-    void custom_draw(WINDOW* win); // Declare the custom_draw function
+    void custom_draw(WINDOW* win); 
 };
 
 #endif

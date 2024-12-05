@@ -1,6 +1,5 @@
 #ifndef SCOREBOARD_H
 #define SCOREBOARD_H
-
 #include <string>
 
 class Scoreboard {
@@ -11,7 +10,7 @@ public:
     void inc_score(int num_bricks);
     void store_score(std::string player_name);
     void display_highest_score();
-    int getScore() const; // Add this line
+    int getScore() const; 
 
 private:
     int score;

@@ -3,7 +3,6 @@
 #include <ncurses.h>
 #include <vector>
 
-// Constructor to initialize the brick generator
 BrickGenerator::BrickGenerator(int rows, int cols, int startX, int startY, int spacingX, int spacingY)
     : rows(rows), cols(cols), startX(startX), startY(startY), spacingX(spacingX), spacingY(spacingY) {}
 
@@ -14,9 +13,7 @@ void BrickGenerator::generateBricks() {
             bool isSpecialBrick = false;
             char specialType = '\0';
 
-            // 70% chance for a normal brick
             if (rand() % 10 < 7) {
-                // Inside the normal brick, 10% chance for it to be special (either + or -)
                 if (rand() % 10 < 1) {
                     isSpecialBrick = true;
                     specialType = (rand() % 2 == 0) ? '+' : '-'; // Randomly assign + or -
@@ -29,7 +26,6 @@ void BrickGenerator::generateBricks() {
     }
 }
 
-// Draw the bricks on the screen
 void BrickGenerator::drawBricks() const {
     for (const auto& brick : bricks) {
         if (brick.active) {
@@ -51,5 +47,5 @@ bool BrickGenerator::areAllBricksDestroyed() const {
             return false; // If any brick is active, return false
         }
     }
-    return true; // If all bricks are inactive, return true
+    return true; 
 }

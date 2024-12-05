@@ -28,10 +28,10 @@ void game(const std::string& player_name) {
 
     // Initialization
     double speed = 20000; // Adjust speed of ball by sleep time
-    int barX = 10;      // Initial position of the bar
-    int barLength = 15; // Length of the bar
-    int lives = 3;     // Number of lives
-    int brickType = 0; // Type of brick
+    int barX = 10;      
+    int barLength = 15; 
+    int lives = 3;     
+    int brickType = 0; 
     string lastEffect = "None";
     bool outofbounds = false;
     bool reset = false;
@@ -46,28 +46,28 @@ void game(const std::string& player_name) {
     Scoreboard scoreboard;
 
     while (true) {
-        clear(); // Clear the screen
+        clear(); 
         // Draw the bar
         for (int i = 0; i < COLS; ++i) {
             mvaddch(5, i, '=');
         } // Draw '=' at row 5 (change this if your scoreboard is higher)
         brickGen.drawBricks();
         for (int i = 0; i < barLength; ++i) {
-            mvaddch(LINES - 1, barX + i, '#'); // Draw the bar at the bottom
+            mvaddch(LINES - 1, barX + i, '#'); 
         }
 
         // Move and draw the ball
         if (ballOnBar) {
-            ball.x = barX + barLength / 2; // Keep the ball on the bar
-            mvaddch(ball.y, ball.x, 'O'); // Draw the ball
+            ball.x = barX + barLength / 2; 
+            mvaddch(ball.y, ball.x, 'O'); 
         } else {
             moveBall(ball, barX, barLength, brickGen, outofbounds, brickType, scoreboard);
-            mvaddch(ball.y, ball.x, 'O'); // Draw the ball
+            mvaddch(ball.y, ball.x, 'O'); 
         }
 
-        scoreboard.display(lives, player_name, lastEffect); // Display the scoreboard
+        scoreboard.display(lives, player_name, lastEffect); 
 
-        refresh(); // Refresh the screen to show changes
+        refresh(); 
 
         if (outofbounds) {
             lives--; // Decrease lives if ball falls below the screen
@@ -83,7 +83,7 @@ void game(const std::string& player_name) {
                 powerUp.applyPowerUp(lives, barLength, reset);
                 brickType = 0;
                 if (reset){
-                    ballOnBar = true; // Reset the ball to be on the bar
+                    ballOnBar = true; 
                     initializeBall(ball, barX, barLength);
                     reset = false;
                     lastEffect = powerUp.getPowerUp();
@@ -104,7 +104,7 @@ void game(const std::string& player_name) {
         if (lives <= 0) {
             scoreboard.store_score(player_name);
             displayGameOver(); // Show Game Over message
-            break; // End the game loop
+            break; 
         }
 
         // Handle user input
@@ -114,14 +114,14 @@ void game(const std::string& player_name) {
         } else if (ch == KEY_RIGHT) {
             if (barX + barLength < COLS) barX += 5; // Move right by 5 steps
         } else if (ch == KEY_UP && ballOnBar) {
-            ball.dirX = 0; // Set initial direction to straight up
+            ball.dirX = 0; 
             ball.dirY = -1;
             ballOnBar = false; // Ball is now in motion
         } else if (ch == 'q') {
             scoreboard.store_score(player_name);
             clear();
             endwin(); // End ncurses mode before returning
-            return; // Quit on 'q'
+            return; 
         }
 
         usleep(speed); // Sleep for a short time (default 10ms)

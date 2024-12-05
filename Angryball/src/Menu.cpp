@@ -3,7 +3,6 @@
 #include <string>
 #include "../include/Menu.h"
 #include "../include/game.h"
-
 using namespace std; 
 
 Menu::Menu() {
@@ -40,7 +39,6 @@ int Menu::display_options() {
     }   
 
     wrefresh(menuwin);
-
     keypad(menuwin, true);
 
     string options[4] = {"Start Game", "Game Info", "How to Play", "Exit Game"};
@@ -147,7 +145,6 @@ void Menu::play_instructions(int y_max, int x_max) {
 }
 
 
-
 string Menu::input_name(int menu_w, int menu_h) {
     char player_name[50];  
     WINDOW* input_name_win = newwin(5, 70, (menu_h) / 2, (menu_w - 70) / 2);
@@ -158,8 +155,7 @@ string Menu::input_name(int menu_w, int menu_h) {
     echo();
     
     wgetnstr(input_name_win, player_name, sizeof(player_name) - 1);  
-
-
+    
     noecho();
    
     werase(input_name_win); 

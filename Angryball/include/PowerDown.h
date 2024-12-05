@@ -1,6 +1,5 @@
 #ifndef POWERDOWN_H
 #define POWERDOWN_H
-
 #include <string>
 
 class PowerDown
