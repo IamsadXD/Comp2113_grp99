@@ -8,8 +8,8 @@ class Menu {
 private:
     WINDOW * menuwin;  
 
-    int menu_h = 30; 
-    int menu_w = 150;
+    int menu_h = LINES; 
+    int menu_w = COLS;
      // height and width of menu are defined here 
 
     string title[5] = { // ASCII Art of title name to be displayed in menu 
