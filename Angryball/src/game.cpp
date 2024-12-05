@@ -48,6 +48,9 @@ void game(const std::string& player_name) {
     while (true) {
         clear(); 
         // Draw the bar
+        if (barLength < 5){
+            barLength = 5;
+        }
         for (int i = 0; i < COLS; ++i) {
             mvaddch(5, i, '=');
         } // Draw '=' at row 5 (change this if your scoreboard is higher)
