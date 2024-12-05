@@ -35,3 +35,4 @@
 export TERMINFO=Angryball/ncurses/share/terminfo
 make -C Angryball
 Angryball/angryball
+
