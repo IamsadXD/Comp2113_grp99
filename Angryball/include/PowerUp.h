@@ -1,6 +1,5 @@
 #ifndef POWERUP_H
 #define POWERUP_H
-
 #include <string>
 
 class PowerUp
@@ -21,5 +20,4 @@ private:
     Type type;
     std::string lastEffect; // Store the last applied effect
 };
-
 #endif // POWERUP_H
