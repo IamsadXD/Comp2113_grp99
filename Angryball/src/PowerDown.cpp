@@ -1,6 +1,6 @@
 #include "../include/PowerDown.h"
 #include <iostream>
-#include <cstdlib> // For rand() and RAND_MAX
+#include <cstdlib> 
 
 PowerDown::PowerDown(Type type) : type(type), lastEffect("None") {}
 
