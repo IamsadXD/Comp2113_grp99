@@ -117,11 +117,6 @@ void game(const std::string& player_name) {
             ball.dirX = 0; 
             ball.dirY = -1;
             ballOnBar = false; // Ball is now in motion
-        } else if (ch == 'q') {
-            scoreboard.store_score(player_name);
-            clear();
-            endwin(); // End ncurses mode before returning
-            return; 
         }
 
         usleep(speed); // Sleep for a short time (default 10ms)
